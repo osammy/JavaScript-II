@@ -86,7 +86,38 @@ console.log(ticketPriceTotal);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+//What was the total donations from those that donated above 100
+let totalAbove100 = 0; 
+totalAbove100 = runners
+                .filter(el => el.donation > 100)
+                .map(el => el.donation )
+                .reduce((acc,curr) => acc + curr,0);
 
+console.log(totalAbove100)
 // Problem 2
-
+  //  who donated the higheset amount
+  const donations = runners.map(el => el.donation);
+  const maxDonation = Math.max(...donations);
+  console.log(maxDonation)
+  const donor = runners.find(el=> el.donation === maxDonation);
+  console.log(donor.first_name + " " + donor.last_name);
 // Problem 3
+//Populate an array of the total donations made by by each category of shirt_size e.g [{s:23,L:200...etc}]
+var uniqueSizes = [];
+let isUnique = false;
+let result  = {};
+
+uniqueSizes = runners.map(el => {
+  isNotUnique = uniqueSizes.includes(el.shirt_size)
+  if(!isNotUnique)  return el.shirt_size
+})
+console.log(uniqueSizes)
+uniqueSizes.forEach(each=>{
+  var buff = runners
+  .filter(el => el.shirt_size === each)
+  .reduce((arr,curr) => arr + curr.donation,0);
+  console.log(buff)
+  result[each] = buff;
+})
+
+console.log(result)
