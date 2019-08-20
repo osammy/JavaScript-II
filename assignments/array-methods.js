@@ -87,18 +87,17 @@ console.log(ticketPriceTotal);
 
 // Problem 1
 //What was the total donations from those that donated above 100
-let totalAbove100 = 0; 
-totalAbove100 = runners
+let totalDonationsAbove100 = 0; 
+totalDonationsAbove100 = runners
                 .filter(el => el.donation > 100)
                 .map(el => el.donation )
                 .reduce((acc,curr) => acc + curr,0);
 
-console.log(totalAbove100)
+console.log(totalDonationsAbove100)
 // Problem 2
   //  who donated the higheset amount
   const donations = runners.map(el => el.donation);
   const maxDonation = Math.max(...donations);
-  console.log(maxDonation)
   const donor = runners.find(el=> el.donation === maxDonation);
   console.log(donor.first_name + " " + donor.last_name);
 // Problem 3
@@ -111,12 +110,11 @@ uniqueSizes = runners.map(el => {
   isNotUnique = uniqueSizes.includes(el.shirt_size)
   if(!isNotUnique)  return el.shirt_size
 })
-console.log(uniqueSizes)
+
 uniqueSizes.forEach(each=>{
   var buff = runners
   .filter(el => el.shirt_size === each)
   .reduce((arr,curr) => arr + curr.donation,0);
-  console.log(buff)
   result[each] = buff;
 })
 
