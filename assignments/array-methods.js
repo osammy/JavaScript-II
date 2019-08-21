@@ -58,28 +58,64 @@ const runners = [
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
 let fullNames = [];
+runners
+.forEach (function(eachRunner) {
+  fullNames.push(eachRunner.first_name + " " + eachRunner.last_name)
+})
 console.log(fullNames);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
 let firstNamesAllCaps = [];
+firstNamesAllCaps = runners.map(el => el.first_name.toUpperCase())
 console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
 let runnersLargeSizeShirt = [];
+runnersLargeSizeShirt = runners.filter(el => el.shirt_size === "L")
 console.log(runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
 let ticketPriceTotal = 0;
+ticketPriceTotal = runners.reduce((acc,curVal) => acc + curVal.donation,0)
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+//What was the total donations from those that donated above 100
+let totalDonationsAbove100 = 0; 
+totalDonationsAbove100 = runners
+                .filter(el => el.donation > 100)
+                .map(el => el.donation )
+                .reduce((acc,curr) => acc + curr,0);
 
+console.log(totalDonationsAbove100)
 // Problem 2
-
+  //  who donated the higheset amount
+  const donations = runners.map(el => el.donation);
+  const maxDonation = Math.max(...donations);
+  const donor = runners.find(el=> el.donation === maxDonation);
+  console.log(donor.first_name + " " + donor.last_name);
 // Problem 3
+//Populate an array of the total donations made by by each category of shirt_size e.g [{s:23,L:200...etc}]
+var uniqueSizes = [];
+let isUnique = false;
+let result  = {};
+
+uniqueSizes = runners.map(el => {
+  isNotUnique = uniqueSizes.includes(el.shirt_size)
+  if(!isNotUnique)  return el.shirt_size
+})
+
+uniqueSizes.forEach(each=>{
+  var buff = runners
+  .filter(el => el.shirt_size === each)
+  .reduce((arr,curr) => arr + curr.donation,0);
+  result[each] = buff;
+})
+
+console.log(result)
